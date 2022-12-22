@@ -1,15 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { Routes, Route } from 'react-router'
 import './App.css'
+import { HomePage } from './pages/HomePage'
 
-function App() {
-  const [count, setCount] = useState(0)
+import { ConsultPage } from './pages/ConsultPage'
+import { BookingPage } from './pages/BookingPage'
+
+export function App() {
+
 
   return (
     <div className="App">
-      <h1>Hello World</h1>
+      <Routes >
+        <Route path='/' element={<HomePage />} />
+        <Route path="/booking" element={<BookingPage />} />
+        <Route path='/consult' element={<ConsultPage />} />
+      </Routes>
     </div>
   )
 }
 
-export default App
+
+
+
+
