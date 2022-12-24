@@ -6,34 +6,25 @@ import axios from "axios"
 import "./HomePage.scss"
 
 export const HomePage = () => {
-
-    const [user, setUser] = useState<any>()
+    const [user, setUser] = useState<any>([])
     const api = axios.create({
-        baseURL: "https://jsonplaceholder.typicode.com/users/",
+        baseURL: "http://localhost:3000",
     });
     useEffect(() => {
         api
-            .get('1')
-            .then((res) =>
+            .get("/patient")
+            .then((res) => 
                 setUser(res.data)
-            )
-
+        )
             .catch((err) => alert("Ocorreu um erro" + err))
     }, [])
 
-
     const tableHead = [
         { id: 1, lang: "Nome", },
-        { id: 2, lang: "Estado", },
-        { id: 3, lang: "Local", },
+        { id: 2, lang: "Email", },
+        { id: 3, lang: "Plano", },
     ]
-    const tableBody = [
-        { id: 1, pacient: "Joaquim", activity: "Ativo", local: "São João do Tauape" },
-        { id: 2, pacient: "Joana", activity: "Ativo", local: "São João do Tauape" },
-        { id: 3, pacient: "Kratos", activity: "Inativo", local: "São João do Tauape" },
-        { id: 4, pacient: "Sanfona", activity: "Ativo", local: "São João do Tauape" },
-        { id: 5, pacient: "Xupas", activity: "Novo", local: "São João do Tauape" },
-    ]
+
 
     return (
         <div className="home">
@@ -41,10 +32,7 @@ export const HomePage = () => {
             <div className="home__container--title">
                 <h1>Home Page</h1>
             </div>
-            <div>
-                <p>Usuário: {user?.name}</p>
-                <p>Bibliografia: {user?.username}</p>
-            </div>
+
             <div className="home__container--content">
                 <SCard size={26} title={"Próxiamas Consultas"} children={<Table bordered hover>
                     <thead >
@@ -75,20 +63,36 @@ export const HomePage = () => {
                         </tr>
                     </tbody>
                 </Table>} />
+
                 <SCard size={40} title={"Pacientes"}
                     children={
                         <div>
                             <Table bordered hover>
                                 <thead >
-                                    <tr>
-                                        {/* {tableHead.map((item): any => (
+
+
+                                    {tableHead.map((item): any => (
                                             <th key={item.id}>{item.lang}</th>
-                                        ))} */}
-                                        {/* {user.map((item: any) => (
-                                            <th >{item?.name}</th>
-                                        ))} */}
-                                    </tr>
+                                    ))}
                                 </thead>
+                                <tbody>
+
+                                    {user.map((user: any, key: any) =>
+                                    (<tr>
+                                        <td key={key.id}>
+                                            {user.name}
+                                        </td>
+                                        <td key={key.id}>
+                                            {user.email}
+                                        </td>
+                                        <td key={key.id}>
+                                            {user.insurance}
+                                        </td>
+                                    </tr>)
+                                    )}
+
+                                </tbody>
+
 
                                 {/* <tbody>
 

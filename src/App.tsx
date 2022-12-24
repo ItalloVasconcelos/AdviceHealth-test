@@ -14,6 +14,7 @@ export function App() {
         <Route path='/' element={<HomePage />} />
         <Route path="/booking" element={<BookingPage />} />
         <Route path='/consult' element={<ConsultPage />} />
+
       </Routes>
     </div>
   )
