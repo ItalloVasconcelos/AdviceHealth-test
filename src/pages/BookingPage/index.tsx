@@ -1,21 +1,17 @@
-import { SCard } from "../../components/Card"
-import { NavBar } from "../../components/Navbar"
+import { SCard } from "../../components/Card";
+import { NavBar } from "../../components/Navbar";
 
 export const BookingPage = () => {
-
-    return (
+  return (
+    <div>
+      <NavBar />
+      <div>
         <div>
-            <NavBar />
-            <div>
-                <div><h1>Booking Page</h1></div>
-
-                <SCard title={"Cadastro de Paciente"} size={80} >
-
-                </SCard>
-
-
-            </div>
+          <h1>Booking Page</h1>
         </div>
-    )
-}
 
+        <SCard title={"Cadastro de Paciente"} size={80} children={undefined}></SCard>
+      </div>
+    </div>
+  );
+};
