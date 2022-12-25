@@ -5,11 +5,13 @@ import { SCard } from '../../components/Card'
 import { NavBar } from '../../components/Navbar'
 import { SButton } from '../../components/Button'
 import { MdEdit, MdDelete } from "react-icons/md";
+import { Button } from 'react-bootstrap'
 
-import { AddPatient } from './AddPatient'
-import { EditPatient } from './EditPatient'
+import { EditPatient } from '../Edit/'
+import { Link } from 'react-router-dom'
 
 export const ConsultPage = () => {
+
     const tableHead = [
         { id: 1, lang: "Nome", },
         { id: 2, lang: "Status", },
@@ -29,17 +31,10 @@ export const ConsultPage = () => {
             )
             .catch((err) => alert("Ocorreu um erro" + err))
     }, [])
-
     function deletePatient(id: any) {
         api.delete(`/patient/${id}`)
+        setUser(user.filter((users: any) => user._id !== id))
     }
-    function handleClick(e: any) {
-        e.preventDefault();
-    }
-    function handleClickEdit(e: any) {
-        e.preventDefault();
-    }
-
     return (
         <div>
             <NavBar />
@@ -48,7 +43,11 @@ export const ConsultPage = () => {
                     <h1>Consult Page</h1>
                 </div>
                 <div>
-                    <SCard title={'Dados dos Pacientes'} button={<SButton variant={"primary"} onClick={handleClick}>{<AddPatient />}</SButton>} size={48} >
+                    <SCard title={'Dados dos Pacientes'} size={48} button={<Link to="/adding" >
+                        <Button variant='info' >
+                            <MdEdit />
+                        </Button>
+                    </Link>}>
 
                         <Table striped bordered hover>
                             <thead>
@@ -65,31 +64,35 @@ export const ConsultPage = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {user.map((user: any, key: any) => (
+                                {user.map((user: any, id: any) => (
                                     <tr>
-                                        <td key={key}>
+                                        <td>
                                             {user.name}
                                         </td>
-                                        <td key={key}>
+                                        <td >
                                             {user.status}
                                         </td>
-                                        <td key={key}>
+                                        <td>
                                             {user.insurance}
                                         </td>
-                                        <td key={key}>
+                                        <td>
                                             {user.email}
                                         </td>
-                                        <td key={key}>
+                                        <td >
                                             {user.contact}
                                         </td>
-                                        <td key={key}>
-                                            <SButton onClick={handleClickEdit}>
-                                                <EditPatient />
-                                            </SButton>
+                                        <td >
+                                            <Link to={{ pathname: `/edit/${user._id}` }}>
+                                                <Button variant='info' >
+                                                    <MdEdit />
+                                                </Button>
+                                            </Link>
+
                                         </td>
-                                        <td key={key}>
+                                        <td >
                                             <SButton
-                                                onClick={() => { }}
+                                                onClick={() =>
+                                                    deletePatient(user._id)}
                                                 variant='danger'><MdDelete /></SButton>
                                         </td>
                                     </tr>
