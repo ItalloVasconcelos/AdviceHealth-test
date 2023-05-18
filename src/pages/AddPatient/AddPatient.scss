@@ -1,0 +1,33 @@
+@import "../../assets/css/vars.scss";
+.addPatient{
+     &__container{
+    margin: 0 75px;
+    padding: 10px;
+    border: 2px solid;
+     }
+     &__title{
+     border: none;
+      border-bottom: 2px solid;
+      background-color: $bold;
+      color: $fonts;
+      padding: 10px;
+      margin: 10px 0;
+      text-align: center;
+      h1 {
+        font-size: 35px;
+        font-weight: 800;
+      }}
+      &__form{
+        display: flex;
+        flex-direction: column;
+       
+        &--side{
+            display: flex;
+            align-items: center;      
+        }
+        &--group{
+            margin: 5px ;
+            width: 50%;
+        }
+      }
+}

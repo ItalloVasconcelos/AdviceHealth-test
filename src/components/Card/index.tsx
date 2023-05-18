@@ -2,15 +2,16 @@ import Card from "react-bootstrap/Card";
 type TSCard = {
   title: string;
   children: any;
-  size: number;
+  width?: number;
+  height?: number;
   button?: any;
 };
 export const SCard = (props: TSCard) => {
-  const { title, children, size, button } = props;
+  const { title, children, width, height, button } = props;
 
   return (
     <div>
-      <Card style={{ width: `${size}rem` }}>
+      <Card style={{ width: `${width}rem`, height: `${height}rem` }}>
         <Card.Header
           style={{ display: "flex", justifyContent: "space-between" }}
           as="h3"

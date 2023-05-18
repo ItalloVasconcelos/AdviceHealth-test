@@ -4,54 +4,56 @@ import { Table } from "react-bootstrap";
 import { SCard } from "../../components/Card";
 import { NavBar } from "../../components/Navbar";
 import { SButton } from "../../components/Button";
-import { MdEdit, MdDelete } from "react-icons/md";
+import { MdEdit, MdDelete, MdAdd } from "react-icons/md";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "./ConsultPage.scss"
 
 export const ConsultPage = () => {
     const tableHead = [
-        { id: 1, lang: "Nome" },
-        { id: 2, lang: "Status" },
-        { id: 3, lang: "Clínica" },
-        { id: 4, lang: "Email" },
-        { id: 5, lang: "Contato" },
+        { id: 1, lang: "Data" },
+        { id: 2, lang: "Início" },
+        { id: 3, lang: "Paciente" },
+        { id: 4, lang: "Clinica" },
+        { id: 5, lang: "Editar" },
+        { id: 6, lang: "Deletar" },
     ];
-    const [user, setUser] = useState<any>([]);
+    const [consult, setConsult] = useState<any>([]);
     const api = axios.create({
         baseURL: "http://localhost:3000",
     });
     useEffect(() => {
         api
-            .get("/patient")
-            .then((res) => setUser(res.data))
+            .get("/consult")
+            .then((res) => setConsult(res.data))
             .catch((err) => alert("Ocorreu um erro" + err));
     }, []);
-    function deletePatient(id: any) {
+    function deleteConsult(id: any) {
         api
-            .delete(`/patient/${id}`)
+            .delete(`/consult/${id}`)
             .then((res) => {
                 console.log("Deletado com Sucesso!");
             })
             .catch((error) => {
                 console.log(error);
             });
-        // setUser(user.filter((users: any) => user._id !== id))
+
     }
     return (
-        <div>
+        <div className="consultPage">
             <NavBar />
-            <div>
-                <div>
-                    <h1>Consult Page</h1>
+            <div className="consultPage__container">
+                <div className="consultPage__title">
+                    <h1>Área da Consulta</h1>
                 </div>
-                <div>
+                <div className="consultPage__content">
                     <SCard
-                        title={"Dados dos Pacientes"}
-                        size={48}
+                        title={"Dados das Consultas"}
+
                         button={
-                            <Link to="/adding">
-                                <Button variant="info">
-                                    <MdEdit />
+                            <Link to="/add/consult">
+                                <Button variant="primary">
+                                    Adicionar uma Consulta <MdAdd size={22} />
                                 </Button>
                             </Link>
                         }
@@ -65,23 +67,23 @@ export const ConsultPage = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {user.map((user: any, id: any) => (
+
+                                {consult.map((consult: any, user: any) => (
                                     <tr>
-                                        <td>{user.name}</td>
-                                        <td>{user.status}</td>
-                                        <td>{user.insurance}</td>
-                                        <td>{user.email}</td>
-                                        <td>{user.contact}</td>
-                                        <td>
-                                            <Link to={{ pathname: `/edit/${user._id}` }}>
-                                                <Button variant="info">
+                                        <td>{consult.date}</td>
+                                        <td>{consult.start}</td>
+                                        <td>{consult.insurance}</td>
+                                        <td>{consult.insurance}</td>
+                                        <td >
+                                            <Link to={{ pathname: `/edit/consult/${consult._id}` }}>
+                                                <Button variant="light">
                                                     <MdEdit />
                                                 </Button>
                                             </Link>
                                         </td>
                                         <td>
                                             <SButton
-                                                onClick={() => deletePatient(user._id)}
+                                                onClick={() => deleteConsult(consult._id)}
                                                 variant="danger"
                                             >
                                                 <MdDelete />

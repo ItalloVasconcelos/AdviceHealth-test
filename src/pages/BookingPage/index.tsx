@@ -1,6 +1,7 @@
 import { SCard } from "../../components/Card";
 import { NavBar } from "../../components/Navbar";
 
+
 export const BookingPage = () => {
   return (
     <div>
@@ -10,7 +11,8 @@ export const BookingPage = () => {
           <h1>Booking Page</h1>
         </div>
 
-        <SCard title={"Cadastro de Paciente"} size={80} children={undefined}></SCard>
+        <SCard title={"Cadastro de Paciente"} width={80} children={undefined}></SCard>
+
       </div>
     </div>
   );
