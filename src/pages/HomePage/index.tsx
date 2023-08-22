@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
-import { Button, Modal, ProgressBar, Table } from "react-bootstrap";
+import { Button, Dropdown, DropdownButton, ProgressBar, Table } from "react-bootstrap";
 import { SCard } from "../../components/Card";
-import { NavBar } from "../../components/Navbar";
 import axios from "axios";
 import "./HomePage.scss";
-import Calendar from 'react-calendar'
-import { MdNavigateNext } from "react-icons/md";
 import 'react-calendar/dist/Calendar.css';
+import { Sidebar } from "../../components/Sidebar";
+import { QCalendar } from "../../components/Calendar";
+import { BsBell, BsGear } from "react-icons/bs";
 
 
 export const HomePage = () => {
   const [user, setUser] = useState<any>([]);
   const [consult, setConsult] = useState<any>([]);
-  const [calendar, setCalendar] = useState(new Date())
-  const [showModal, setShowModal] = useState(false)
   const api = axios.create({
     baseURL: "http://localhost:3000",
   });
@@ -42,51 +40,63 @@ export const HomePage = () => {
     { id: 2, lang: "Email" },
     { id: 3, lang: "Clínica" },
   ];
-  const handleClose = () => setShowModal(false);
-  const handleShow = () => setShowModal(true);
 
-  function onClickDate() {
-    handleShow()
-
-
-  }
   return (
-    <div className="home">
-      <NavBar />
-      <div className="home__container">
-      <div className="home__container--title">
-        <h1>Home Page</h1>
-      </div>
+    <> <Sidebar />
+      <div className="home">
+        <div className=" home__container">
+          <div className="  home-">
+            <div className="home-container__present">
+              <h1>Olá! Bem vindo de volta {"Médico nome"} </h1>
+              <h3>Aqui estão seus compromissos</h3>
+            </div>
+            <div>
+              Filtro de pesquisa aqui
+              <Button placeholder="Search" color="primary" />
+            </div>
 
-      <div className="home__container--content">
-          <div className="home__container--consult">
-        <SCard
-              width={28} height={22}
+            <div>
+              <Dropdown children={<BsBell />} />
+              <Dropdown children={<BsGear />} />
+            </div>
+          </div>
+          <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} className="col">
+            <div className="">
+              <h4>Calendario</h4>
+              <QCalendar />
+            </div>
+            <SCard
+              width={65} height={15}
               title={"Próximas Consultas"}
-          children={
-            <Table bordered hover>
-              <thead>
-                <tr>
-                  {tableHeadConsults.map((item): any => (
-                    <th key={item.id}>{item.lang}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
+              children={
+                <Table bordered hover>
+                  <thead>
+                    <tr>
+                      {tableHeadConsults.map((item): any => (
+                        <th key={item.id}>{item.lang}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
 
-                {consult.map((consult: any) => (
-                  <tr>
-                    <td>Mario</td>
-                    <td>{consult.insurance}</td>
-                    <td>{consult.date}</td>
-                    <td>{consult.start}</td>
-                  </tr>
-                ))}
+                    {consult.map((consult: any) => (
+                      <tr>
+                        <td>Mario</td>
+                        <td>{consult.insurance}</td>
+                        <td>{consult.date}</td>
+                        <td>{consult.start}</td>
+                      </tr>
+                    ))}
 
                   </tbody>
                 </Table>
               }
             />
+          </section>
+
+          <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} className="col">
+
+            <div className="home__container--consult">
             <SCard
               width={28} height={22}
               title={"Consultas Concluídas"}
@@ -114,52 +124,7 @@ export const HomePage = () => {
             </Table>
           }
             />
-          </div>
-          <div className="home__container--calendar">
-            <SCard title={"Calendário"} width={24} children={
-              <div>
-                <Calendar value={calendar} onClickDay={onClickDate} onChange={setCalendar} nextLabel={<MdNavigateNext />} />
-                <Modal show={showModal} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>{`Consultas de hoje!`}</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>{<Table bordered hover>
-                    <thead>
-                      <tr>
-                        {tableHeadConsults.map((item): any => (
-                          <th key={item.id}>{item.lang}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-
-                      {consult.map((consult: any) => (
-                        <tr>
-                          <td>Mario</td>
-                          <td>{consult.insurance}</td>
-                          <td>{consult.date}</td>
-                          <td>{consult.start}</td>
-                        </tr>
-                      ))}
-
-                    </tbody>
-                  </Table>}</Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                      Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                      Save Changes
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
-              </div>
-            } />
-          </div>
-        </div>
-
-        <div>
-
+            </div>
           <SCard
             width={40}
             title={"Pacientes"}
@@ -180,7 +145,6 @@ export const HomePage = () => {
                       </tr>
                     ))}
                   </tbody>
-
                 </Table>
                 <ProgressBar max={100}>
                   <ProgressBar
@@ -195,10 +159,10 @@ export const HomePage = () => {
                 </ProgressBar>
               </div>
             }
-          />
-
+            />
+          </section>
         </div>
       </div>
-    </div>
+    </>
   );
 };

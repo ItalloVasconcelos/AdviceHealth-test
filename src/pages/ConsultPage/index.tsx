@@ -7,7 +7,9 @@ import { SButton } from "../../components/Button";
 import { MdEdit, MdDelete, MdAdd } from "react-icons/md";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { Sidebar } from "../../components/Sidebar";
 import "./ConsultPage.scss"
+
 
 export const ConsultPage = () => {
     const tableHead = [
@@ -41,7 +43,7 @@ export const ConsultPage = () => {
     }
     return (
         <div className="consultPage">
-            <NavBar />
+            <Sidebar />
             <div className="consultPage__container">
                 <div className="consultPage__title">
                     <h1>Área da Consulta</h1>

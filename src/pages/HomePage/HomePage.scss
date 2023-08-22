@@ -1,5 +1,6 @@
 @import "../../assets/css/vars.scss";
 .home {
+  border: solid 1px brown;
   background-color: $primary;
   &__container {
     margin: 0 200px;

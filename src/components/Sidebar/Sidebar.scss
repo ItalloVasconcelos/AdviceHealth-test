@@ -1,0 +1,35 @@
+.sidebar{
+    
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F8F9FA; //colocar nas vars
+    width: 53px;
+    height: 100%;
+    &__itens{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(sidebarBG);
+        height: 50px;
+        width: 53px;
+        border-bottom: 1px solid #DEE2E6;
+        &-user{
+            position: relative;
+            top: 660px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #F8F9FA;
+        height: 50px;
+        width: 53px;
+        border-top: 1px solid #DEE2E6;
+        color: #000000;
+        }
+    }
+    __itens-a > a.active {
+     background-color: yellow;
+        color: #000;
+    }
+}

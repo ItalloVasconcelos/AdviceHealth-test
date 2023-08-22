@@ -16,9 +16,9 @@ export function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/booking" element={<BookingPage />} />
         <Route path="/consult" element={<ConsultPage />} />
+        <Route path="/patient" element={<DataPatientPage />} />
         <Route path="/add/consult" element={<AddConsult />} />
         <Route path="/edit/consult/:id" element={<EditConsult />} />
-        <Route path="/patient" element={<DataPatientPage />} />
         <Route path="/add/patient" element={<AddPatient />} />
         <Route path="/edit/patient/:id" element={<EditPatient />} />
       </Routes>

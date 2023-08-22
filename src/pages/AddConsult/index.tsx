@@ -56,7 +56,7 @@ export const AddConsult = () => {
                     <h1>Consultas</h1>
                 </div>
                 <div className="editConsult__content">
-                    <SCard size={50} title={"Formulário de consultas"} children={
+                    <SCard title={"Formulário de consultas"} children={
                         <Form className="addConsult__form" onSubmit={handleSubmit(addConsultAPI)}>
 
                             <div className="editConsult__form--side">

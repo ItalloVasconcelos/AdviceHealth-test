@@ -7,6 +7,7 @@ import * as yup from "yup";
 import axios from "axios";
 import "./AddPatient.scss"
 import { SCard } from "../../components/Card";
+import { Sidebar } from "../../components/Sidebar";
 const schema = yup.object().shape({
     name: yup.string().required("Digite o nome do Paciente"),
     email: yup.string().required("Digite o email do Paciente"),
@@ -39,7 +40,7 @@ export const AddPatient = () => {
 
     return (
         <div className="addPatient">
-            <NavBar />
+            <Sidebar />
             <div className="addPatient__container">
                 <div className="addPatient__title">
                     <h1>Adicionar Pacientes</h1>

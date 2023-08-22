@@ -1,12 +1,12 @@
 import { SCard } from "../../components/Card";
-import { NavBar } from "../../components/Navbar";
+import { Sidebar } from "../../components/Sidebar";
 
 
 export const BookingPage = () => {
   return (
     <div>
-      <NavBar />
-      <div>
+      <Sidebar />
+      <div style={{ margin: "59px" }}>
         <div>
           <h1>Booking Page</h1>
         </div>
